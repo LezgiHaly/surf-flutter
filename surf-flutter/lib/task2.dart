@@ -11,72 +11,80 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
    return  const MaterialApp(
-    home: Task2 ());
+    home: Task ());
   }
 }
 
+bool selected3 = false;
+bool selected4 = false;
+bool animation = false;
 
-class Task2 extends StatefulWidget {
-  const Task2({super.key});
+
+class Task extends StatefulWidget {
+  const Task({super.key});
 
   @override
-  State<Task2> createState() => _Task2State();
+  State<Task> createState() => _TaskState();
 }
 
-class _Task2State extends State<Task2> with TickerProviderStateMixin {
+class _TaskState extends State<Task> with TickerProviderStateMixin {
 
 late final AnimationController _controller = AnimationController(
-    duration: const Duration(seconds: 4),
+    duration: const Duration(seconds: 2),
     vsync: this,
   )..repeat(reverse: true);
   late final Animation<double> _animation = CurvedAnimation(
     parent: _controller,
     curve: Curves.easeInOut,
   );
+void _onTap () {
+  setState(() {
+    selected3 = !selected3;
+  });
+}
+void _onLongPress () {
+setState(() {
+    animation = !animation;
+  });
+}
+void _onPanUpdate (details) {
+  setState(() {
+    selected4 = !selected4;
+  });
 
-bool selected = false;
-bool animation = false;
-
+}
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: 
-    Stack(children: [
-     GestureDetector(
-      onTap: () {
-        setState(() {
-          selected = !selected;
-        });
-      },
-      onLongPress: () {
-        setState(() {
-          animation = !animation;
-        });
-      },
-      child: 
-      Align(alignment:
-        selected ? Alignment.center : AlignmentDirectional.centerStart,
-        child: 
-        animation ?
-        RotationTransition(
-          turns: _animation,
-          child: AnimatedContainer(
-            width: selected ? 100.0 : 100.0,
-            height: selected ? 200.0 : 100.0,
-            color: selected ? Colors.red : Colors.blue,
+    return Stack(
+      children: [
+        Positioned( 
+          right: selected4 ? 100 : 0,
+           top: selected4 ? 100 : 150, 
+           bottom: selected4 ? 100 : 10,
+           left: selected4 ? 100 : 50,
+          child: 
+          animation ?
+          RotationTransition(
+            turns: _animation,
+            child: AnimatedContainer(
+              color: selected3 ? Colors.red : Colors.blue,
+              duration: const Duration(seconds: 2),
+              curve: Curves.easeInBack,
+            ),
+          ) :         
+          AnimatedContainer(
+            color: selected3 ? Colors.red : Colors.blue,
             duration: const Duration(seconds: 2),
-            curve: Curves.fastOutSlowIn,
+            curve: Curves.easeInBack,
           ),
-        ) : AnimatedContainer(
-            width: selected ? 100.0 : 100.0,
-            height: selected ? 200.0 : 100.0,
-            color: selected ? Colors.red : Colors.blue,
-            duration: const Duration(seconds: 2),
-            curve: Curves.fastOutSlowIn,
           ),
-      ),
-    )
-        ],
+        Positioned.fill(child: GestureDetector(
+          onTap: _onTap,
+          onLongPress: _onLongPress,
+          onPanUpdate: _onPanUpdate,
         ),
-        );
+        ),
+      ],
+    );
   }
 }

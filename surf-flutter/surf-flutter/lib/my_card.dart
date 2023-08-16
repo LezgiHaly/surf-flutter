@@ -10,19 +10,27 @@ class Mycard extends StatelessWidget {
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(25), color: AppColors.backColor1 ),
       child: Row(
         children: [
-           const Expanded(
+          const SizedBox(width: 12,),
+            Expanded(
             flex: 1,
              child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(AppStrings.name, style: 
-                TextStyle(color: Colors.white, fontSize: 14, 
-                fontFamily: 'RobotoMono',
-                ),
-
-              // AppTypography.text12Regular.copyWith(color: AppColors.whiteColor),
+              AppTypography.text22Regular.copyWith(color: AppColors.whiteColor),
+              ),
+              Text(AppStrings.work, style: 
+              AppTypography.text10Regular.copyWith(color: AppColors.whiteColor),
+              ),
+            const SizedBox(height: 25,),
+               Text(AppStrings.phone, style: 
+              AppTypography.text10Regular.copyWith(color: AppColors.whiteColor),
+              ),
+               Text(AppStrings.mail, style: 
+              AppTypography.text10Regular.copyWith(color: AppColors.whiteColor),
               ),
               ],
-                     ),
+             ),
            ),
           ClipRRect(
             borderRadius: const BorderRadius.only(topRight: Radius.circular(25), bottomRight: Radius.circular(25)),

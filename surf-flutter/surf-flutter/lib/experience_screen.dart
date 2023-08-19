@@ -14,17 +14,19 @@ class ExperienceScreen extends StatelessWidget {
         backgroundColor: AppColors.backColor,
         elevation: 0,
         centerTitle: true,
-        title: const Text(AppStrings.hobbi),
+        title: const Text(AppStrings.developmentExperience),
         titleTextStyle: AppTypography.text35CaveatBold.copyWith(color: AppColors.appColor1),
       ),
-      body:  Column(
-        children: [
-          const SizedBox(height: 16,),
-          Text
-          (AppStrings.experience, 
-          textAlign: TextAlign.center,
-          style: AppTypography.text35CaveatBold.copyWith(color: AppColors.whiteColor),)
-      ],
+      body:  SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(height: 16,),
+            Text
+            (AppStrings.experience, 
+            textAlign: TextAlign.center,
+            style: AppTypography.text35CaveatBold.copyWith(color: AppColors.whiteColor),)
+        ],
+        ),
       ),
     );
   }
